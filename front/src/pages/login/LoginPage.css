@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'SangSangYoungestDaughter';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/SangSangYoungestDaughter.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background: #80a5e5; */
+  background-color: #4AB3BC;
+}
+
+.box {
+  width: 500px;
+  height: 400px;
+  /* background: #1081E0; */
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.name_input {
+  width: 300px;
+  height: 60px;
+  border-radius: 3px;
+  padding-left: 12px;
+  border: none;
+  outline: none;
+
+  font-family: 'yg-jalnan';
+  font-size: 1em;
+}
+
+.login_btn {
+  width: 312px;
+  height: 60px;
+  border-radius: 3px;
+  background-color: #CCCCCC;
+  border: none;
+  cursor: pointer;
+
+  font-family: 'yg-jalnan';
+  font-size: 1em;
+}
+.login_btn:hover {
+  background-color: #FEE76F;
+  transition: all .5s ease;
+}
+
+.logo {
+  /* font-family: 'SangSangYoungestDaughter'; */
+  font-family: 'Jeju Hallasan', cursive;
+
+  font-size: 56px;
+  /* font-style: italic; */
+  font-weight: 700;
+  color: #F6B7C8;
+  padding: 0;
+  margin: 0;
+}
