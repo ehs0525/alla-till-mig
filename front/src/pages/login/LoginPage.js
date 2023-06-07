@@ -7,6 +7,7 @@ import Logo from "./Logo";
 import NameInput from "./NameInput";
 import LoginButton from "./LoginButton";
 import { setMyLocation } from "../../features/mapSlice";
+import { getFakeLocation } from "./FAKE_LOCATIONS";
 
 const isUsernameValid = (username) => {
   return username.length > 0 && username.length < 10 && !username.includes(" ");
@@ -21,7 +22,6 @@ const LoginPage = () => {
 
   useEffect(() => {
     const success = (position) => {
-      console.log(position);
       dispatch(
         setMyLocation({
           lat: position.coords.latitude,
@@ -40,7 +40,8 @@ const LoginPage = () => {
       timeout: 5000,
     };
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
+    // navigator.geolocation.getCurrentPosition(success, error, options);
+    success(getFakeLocation());
   }, [dispatch]);
 
   const onLogin = useCallback(() => {
