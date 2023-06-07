@@ -53,9 +53,12 @@
   font-family: 'yg-jalnan';
   font-size: 1em;
 }
-.login_btn:hover {
+.login_btn:not(:disabled):hover {
   background-color: #FEE76F;
   transition: all .5s ease;
+}
+.login_btn:disabled:hover {
+  cursor: not-allowed;
 }
 
 .logo {
