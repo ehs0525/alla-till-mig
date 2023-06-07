@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import "./LoginPage.css";
 import Logo from "./Logo";
 import NameInput from "./NameInput";
 import LoginButton from "./LoginButton";
+import { setMyLocation } from "../../features/mapSlice";
 
 const isUsernameValid = (username) => {
   return username.length > 0 && username.length < 10 && !username.includes(" ");
@@ -15,10 +17,17 @@ const LoginPage = () => {
   const [isLocationError, setIsLocationError] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const success = (position) => {
       console.log(position);
+      dispatch(
+        setMyLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+      );
     };
     const error = (error) => {
       console.log("Sorry, no position available.");
@@ -32,7 +41,7 @@ const LoginPage = () => {
     };
 
     navigator.geolocation.getCurrentPosition(success, error, options);
-  }, []);
+  }, [dispatch]);
 
   const onLogin = useCallback(() => {
     navigate("/map");
