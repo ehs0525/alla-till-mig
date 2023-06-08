@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./LoginPage.css";
+
 import Logo from "./Logo";
 import NameInput from "./NameInput";
 import LoginButton from "./LoginButton";
+
 import { setMyLocation } from "../../features/mapSlice";
 import { getFakeLocation } from "./FAKE_LOCATIONS";
+import { connectWithSocketIOServer } from "../../socket";
 
 const isUsernameValid = (username) => {
   return username.length > 0 && username.length < 10 && !username.includes(" ");
@@ -16,6 +19,8 @@ const isUsernameValid = (username) => {
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [isLocationError, setIsLocationError] = useState(false);
+
+  const myLocation = useSelector((state) => state.map.myLocation);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,6 +48,11 @@ const LoginPage = () => {
     // navigator.geolocation.getCurrentPosition(success, error, options);
     success(getFakeLocation());
   }, [dispatch]);
+  useEffect(() => {
+    if (myLocation) {
+      connectWithSocketIOServer();
+    }
+  }, [myLocation]);
 
   const onLogin = useCallback(() => {
     navigate("/map");
