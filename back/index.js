@@ -7,6 +7,8 @@ const { Server } = require("socket.io");
 
 const port = process.env.PORT || 3003;
 
+let onlineUsers = {};
+
 app.use(cors());
 
 const io = new Server(server, {
@@ -22,8 +24,21 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log(`a user connected: ${socket.id}`);
+
+  socket.on("user-login", (data) => {
+    onlineUsers[socket.id] = {
+      username: data.username,
+      coords: data.coords,
+    };
+    console.log(onlineUsers);
+  });
+
   socket.on("disconnect", () => {
     console.log(`a user disconnected: ${socket.id}`);
+    if (onlineUsers[socket.id]) {
+      delete onlineUsers[socket.id];
+    }
+    console.log(onlineUsers);
   });
 });
 
