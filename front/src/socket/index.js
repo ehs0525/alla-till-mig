@@ -1,7 +1,9 @@
 import { io } from "socket.io-client";
 
+let socket = null;
+
 export const connectWithSocketIOServer = () => {
-  const socket = io("http://localhost:3003");
+  socket = io("http://localhost:3003");
 
   socket.on("connect", () => {
     console.log(`connected to socket server: ${socket.id}`);
@@ -10,4 +12,8 @@ export const connectWithSocketIOServer = () => {
   socket.on("disconnect", () => {
     console.log(`disconnected to socket server: ${socket.id}`); // undefined
   });
+};
+
+export const login = (data) => {
+  socket.emit("user-login", data);
 };

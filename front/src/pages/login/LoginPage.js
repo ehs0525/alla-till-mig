@@ -10,7 +10,7 @@ import LoginButton from "./LoginButton";
 
 import { setMyLocation } from "../../features/mapSlice";
 import { getFakeLocation } from "./FAKE_LOCATIONS";
-import { connectWithSocketIOServer } from "../../socket";
+import { connectWithSocketIOServer, login } from "../../socket";
 
 const isUsernameValid = (username) => {
   return username.length > 0 && username.length < 10 && !username.includes(" ");
@@ -55,8 +55,15 @@ const LoginPage = () => {
   }, [myLocation]);
 
   const onLogin = useCallback(() => {
+    login({
+      username,
+      coords: {
+        lat: myLocation.lat,
+        lng: myLocation.lng,
+      },
+    });
     navigate("/map");
-  }, [navigate]);
+  }, [username, myLocation?.lat, myLocation?.lng, navigate]);
 
   return (
     <div className="container">
