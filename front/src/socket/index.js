@@ -9,6 +9,10 @@ export const connectWithSocketIOServer = () => {
     console.log(`connected to socket server: ${socket.id}`);
   });
 
+  socket.on("online-users", (data) => {
+    console.log(data);
+  });
+
   socket.on("disconnect", () => {
     console.log(`disconnected to socket server: ${socket.id}`); // undefined
   });
