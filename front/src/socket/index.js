@@ -1,4 +1,5 @@
 import { io } from "socket.io-client";
+import { onlineUsersDispatcher } from "../features/actions/onlineUsersAction";
 
 let socket = null;
 
@@ -10,7 +11,7 @@ export const connectWithSocketIOServer = () => {
   });
 
   socket.on("online-users", (data) => {
-    console.log(data);
+    onlineUsersDispatcher(socket.id, data);
   });
 
   socket.on("disconnect", () => {
