@@ -66,7 +66,7 @@ const LoginPage = () => {
   }, [username, myLocation?.lat, myLocation?.lng, navigate]);
 
   return (
-    <div className="container">
+    <div className="login_container">
       <div className="box">
         <Logo />
         <NameInput username={username} setUsername={setUsername} />
