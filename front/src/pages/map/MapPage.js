@@ -34,6 +34,7 @@ const MapPage = () => {
             lng={user.coords.lng}
             socketID={user.socketID}
             username={user.username}
+            coords={user.coords}
             isMe={user.isMe}
           />
         ))}

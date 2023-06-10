@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+import { getDistance } from "../../utils/distance";
+
 const UserCard = ({ socketID, username, coords }) => {
   const myLocation = useSelector((state) => state.map.myLocation);
 
@@ -10,7 +12,7 @@ const UserCard = ({ socketID, username, coords }) => {
         {username}
       </p>
       <p className="card_label" style={{ fontSize: "14px" }}>
-        24km
+        {getDistance(myLocation, coords)}
       </p>
     </div>
   );

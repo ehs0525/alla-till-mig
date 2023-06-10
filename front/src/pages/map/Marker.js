@@ -16,6 +16,7 @@ const Marker = ({ socketID, username, coords, isMe }) => {
         coords,
       })
     );
+    console.log("SELECT USER");
   });
 
   return (
