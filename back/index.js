@@ -39,10 +39,14 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log(`a user disconnected: ${socket.id}`);
+
+    // remove offline user from online users array
     if (onlineUsers[socket.id]) {
       delete onlineUsers[socket.id];
     }
     console.log(onlineUsers);
+
+    io.to("logged-users").emit("offline-users", socket.id);
   });
 });
 

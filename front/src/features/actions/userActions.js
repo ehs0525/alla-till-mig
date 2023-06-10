@@ -1,5 +1,5 @@
 import { store } from "../../app/store";
-import { setOnlineUsers } from "../mapSlice";
+import { setOnlineUsers, removeOfflineUser } from "../mapSlice";
 
 export const onlineUsersDispatcher = (socketID, data) => {
   store.dispatch(
@@ -12,4 +12,8 @@ export const onlineUsersDispatcher = (socketID, data) => {
       })
     )
   );
+};
+
+export const offlineUserDispatcher = (socketID) => {
+  store.dispatch(removeOfflineUser(socketID));
 };
