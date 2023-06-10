@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   myLocation: null,
   onlineUsers: [],
-  cardChosenOption: null,
+  selectedUser: null,
 };
 
 export const mapSlice = createSlice({
@@ -21,10 +21,17 @@ export const mapSlice = createSlice({
         (user) => user.socketID !== action.payload
       );
     },
+    setSelectedUser: (state, action) => {
+      state.selectedUser = action.payload;
+    },
   },
 });
 
-export const { setMyLocation, setOnlineUsers, removeOfflineUser } =
-  mapSlice.actions;
+export const {
+  setMyLocation,
+  setOnlineUsers,
+  removeOfflineUser,
+  setSelectedUser,
+} = mapSlice.actions;
 
 export default mapSlice.reducer;

@@ -5,10 +5,12 @@ import GoogleMapReact from "google-map-react";
 import "./MapPage.css";
 
 import Marker from "./Marker";
+import UserCard from "./UserCard";
 
 const MapPage = () => {
-  const myLocation = useSelector((state) => state.map.myLocation);
-  const onlineUsers = useSelector((state) => state.map.onlineUsers);
+  const { myLocation, onlineUsers, selectedUser } = useSelector(
+    (state) => state.map
+  );
 
   const defaultProps = {
     center: {
@@ -36,6 +38,13 @@ const MapPage = () => {
           />
         ))}
       </GoogleMapReact>
+      {selectedUser && (
+        <UserCard
+          socketID={selectedUser.socketID}
+          username={selectedUser.username}
+          coords={selectedUser.coords}
+        />
+      )}
     </div>
   );
 };
