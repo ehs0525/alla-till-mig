@@ -12,7 +12,7 @@ const UserCard = ({ socketID, username, coords }) => {
         {username}
       </p>
       <p className="card_label" style={{ fontSize: "14px" }}>
-        {getDistance(myLocation, coords)}
+        {getDistance(myLocation, coords)}km
       </p>
     </div>
   );

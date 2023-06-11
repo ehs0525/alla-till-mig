@@ -12,5 +12,5 @@ export const getDistance = (coord1, coord2) => {
 
   const d = (R * c) / 1000; // in kilometres
 
-  return d;
+  return d.toFixed(2);
 };
