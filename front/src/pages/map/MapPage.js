@@ -6,6 +6,7 @@ import "./MapPage.css";
 
 import Marker from "./Marker";
 import UserCard from "./UserCard";
+import ChatWrapper from "./chat/ChatWrapper";
 
 const MapPage = () => {
   const { myLocation, onlineUsers, selectedUser } = useSelector(
@@ -46,6 +47,7 @@ const MapPage = () => {
           coords={selectedUser.coords}
         />
       )}
+      <ChatWrapper />
     </div>
   );
 };
