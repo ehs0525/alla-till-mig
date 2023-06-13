@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import { getDistance } from "../../utils/distance";
 
+import ChatButton from "./ChatButton";
+
 const UserCard = ({ socketID, username, coords }) => {
   const myLocation = useSelector((state) => state.map.myLocation);
 
@@ -14,6 +16,9 @@ const UserCard = ({ socketID, username, coords }) => {
       <p className="card_label" style={{ fontSize: "14px" }}>
         {getDistance(myLocation, coords)}km
       </p>
+      <div className="card_buttons_container">
+        <ChatButton socketID={socketID} username={username} />
+      </div>
     </div>
   );
 };
