@@ -40,7 +40,7 @@
   right: 10px;
 }
 
-.chatbox_messages_container {
+.chat_message_container {
   width: 100%;
   flex-grow: 1;
   display: flex;
