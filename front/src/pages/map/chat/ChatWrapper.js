@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import "./ChatWrapper.css";
 
@@ -28,6 +29,8 @@ const DUMMY_POPUP_CHAT_WINDOWS = [
 ];
 
 const ChatWrapper = () => {
+  const chatRooms = useSelector((state) => state.chat.rooms);
+
   return (
     <div className="chat_container">
       {DUMMY_POPUP_CHAT_WINDOWS.map((pcw) => (
