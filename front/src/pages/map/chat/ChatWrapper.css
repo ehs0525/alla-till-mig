@@ -48,13 +48,13 @@
   overflow-y: auto;
 }
 
-.chatbox_new_message_container {
+.message_input_container {
   width: 100%;
   min-height: 40px;
   border-top: 1px solid #E5E5E5;
 }
 
-.chatbox_new_message_input {
+.message_input {
   width: calc(100% - 10px);
   height: 100%;
   border: none;
