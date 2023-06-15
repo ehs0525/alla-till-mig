@@ -9,7 +9,7 @@ const PopupChatWindow = ({ username, socketID }) => {
     <div className="popup_chat_window_container">
       <NavBar username={username} socketID={socketID} />
       <ChatMessages />
-      <MessageInput />
+      <MessageInput socketID={socketID} />
     </div>
   );
 };

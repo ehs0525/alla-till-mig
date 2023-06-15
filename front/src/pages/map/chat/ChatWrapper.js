@@ -29,15 +29,15 @@ const DUMMY_POPUP_CHAT_WINDOWS = [
 ];
 
 const ChatWrapper = () => {
-  const chatRooms = useSelector((state) => state.chat.rooms);
+  const openChatRooms = useSelector((state) => state.chat.openRooms);
 
   return (
     <div className="chat_container">
-      {DUMMY_POPUP_CHAT_WINDOWS.map((pcw) => (
+      {openChatRooms.map((ocr) => (
         <PopupChatWindow
-          key={pcw.socketID}
-          username={pcw.username}
-          socketID={pcw.socketID}
+          key={ocr.socketID}
+          username={ocr.username}
+          socketID={ocr.socketID}
         />
       ))}
     </div>

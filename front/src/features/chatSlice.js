@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  rooms: [],
+  openRooms: [],
   history: {},
 };
 
@@ -9,19 +9,43 @@ export const mapSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    addChatRoom: (state, action) => {
-      if (state.rooms.find((room) => room.socketID === action.payload.socketID))
+    addOpenChatRoom: (state, action) => {
+      if (
+        state.openRooms.find(
+          (room) => room.socketID === action.payload.socketID
+        )
+      )
         return;
-      state.rooms.push(action.payload);
+      state.openRooms.push(action.payload);
     },
-    removeChatRoom: (state, action) => {
-      state.rooms = state.rooms.filter(
-        (room) => room.socketID !== action.payload.socketID
+    removeOpenChatRoom: (state, action) => {
+      state.openRooms = state.openRooms.filter(
+        (room) => room.socketID !== action.payload
       );
+    },
+    addChatMessage: (state, action) => {
+      // 이미 대화 내역이 있다면
+      if (state.history[action.payload.socketID]) {
+        state.history[action.payload.socketID].push({
+          id: action.payload.id,
+          content: action.payload.content,
+          isMine: action.payload.isMine,
+        });
+      } else {
+        // 처음 대화하는 거라면
+        state.history[action.payload.socketID] = [
+          {
+            id: action.payload.id,
+            content: action.payload.content,
+            isMine: action.payload.isMine,
+          },
+        ];
+      }
     },
   },
 });
 
-export const { addChatRoom, removeChatRoom } = mapSlice.actions;
+export const { addOpenChatRoom, removeOpenChatRoom, addChatMessage } =
+  mapSlice.actions;
 
 export default mapSlice.reducer;
