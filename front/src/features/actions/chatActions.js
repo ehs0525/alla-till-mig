@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 import { store } from "../../app/store";
-import { addChatHistory } from "../chatSlice";
+import { addChatHistory, addOpenChatRoom } from "../chatSlice";
 import { sendChatMessage } from "../../socket";
 
 export const sendChatMessageDispatch = (recipientSocketID, data) => {
@@ -35,4 +35,15 @@ export const receiveChatMessageDispatch = (data) => {
       isMine: data.isMine,
     })
   );
+};
+
+export const openChatRoomDispatch = (socketID) => {
+  if (store.getState().chat.openRooms.find((cr) => cr.socketID === socketID))
+    return;
+
+  const username = store
+    .getState()
+    .map.onlineUsers.find((user) => user.socketID === socketID)?.username;
+
+  store.dispatch(addOpenChatRoom({ socketID, username }));
 };

@@ -16,8 +16,7 @@ const Marker = ({ socketID, username, coords, isMe }) => {
         coords,
       })
     );
-    console.log("SELECT USER");
-  });
+  }, [socketID, username, coords, isMe, dispatch]);
 
   return (
     <div className="marker_container" onClick={onClickMarker}>

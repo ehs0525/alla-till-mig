@@ -3,7 +3,10 @@ import {
   offlineUserDispatch,
   onlineUsersDispatch,
 } from "../features/actions/userActions";
-import { receiveChatMessageDispatch } from "../features/actions/chatActions";
+import {
+  openChatRoomDispatch,
+  receiveChatMessageDispatch,
+} from "../features/actions/chatActions";
 
 let socket = null;
 
@@ -24,6 +27,7 @@ export const connectWithSocketIOServer = () => {
 
   socket.on("chat-message", (data) => {
     receiveChatMessageDispatch(data);
+    openChatRoomDispatch(data.senderSocketID);
   });
 
   socket.on("disconnect", () => {
