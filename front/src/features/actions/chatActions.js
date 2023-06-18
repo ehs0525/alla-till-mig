@@ -4,7 +4,7 @@ import { store } from "../../app/store";
 import { addChatHistory } from "../chatSlice";
 import { sendChatMessage } from "../../socket";
 
-export const sendChatMessageDispatcher = (recipientSocketID, data) => {
+export const sendChatMessageDispatch = (recipientSocketID, data) => {
   const chatMessage = {
     recipientSocketID,
     id: uuidv4(),
@@ -16,5 +16,23 @@ export const sendChatMessageDispatcher = (recipientSocketID, data) => {
   sendChatMessage(chatMessage);
 
   // local store 추가
-  store.dispatch(addChatHistory(chatMessage));
+  store.dispatch(
+    addChatHistory({
+      socketID: chatMessage.recipientSocketID,
+      id: chatMessage.id,
+      content: chatMessage.content,
+      isMine: chatMessage.isMine,
+    })
+  );
+};
+
+export const receiveChatMessageDispatch = (data) => {
+  store.dispatch(
+    addChatHistory({
+      socketID: data.senderSocketID,
+      id: data.id,
+      content: data.content,
+      isMine: data.isMine,
+    })
+  );
 };

@@ -1,8 +1,9 @@
 import { io } from "socket.io-client";
 import {
-  offlineUserDispatcher,
-  onlineUsersDispatcher,
+  offlineUserDispatch,
+  onlineUsersDispatch,
 } from "../features/actions/userActions";
+import { receiveChatMessageDispatch } from "../features/actions/chatActions";
 
 let socket = null;
 
@@ -14,15 +15,15 @@ export const connectWithSocketIOServer = () => {
   });
 
   socket.on("online-users", (data) => {
-    onlineUsersDispatcher(socket.id, data);
+    onlineUsersDispatch(socket.id, data);
   });
 
   socket.on("offline-users", (socketID) => {
-    offlineUserDispatcher(socketID);
+    offlineUserDispatch(socketID);
   });
 
   socket.on("chat-message", (data) => {
-    console.log("message received", data);
+    receiveChatMessageDispatch(data);
   });
 
   socket.on("disconnect", () => {

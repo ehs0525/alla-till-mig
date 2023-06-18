@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { sendChatMessageDispatcher } from "../../../features/actions/chatActions";
+import { sendChatMessageDispatch } from "../../../features/actions/chatActions";
 
 const MessageInput = ({ socketID }) => {
   const [message, setMessage] = useState("");
@@ -22,8 +22,7 @@ const MessageInput = ({ socketID }) => {
     (e) => {
       if (e.nativeEvent.isComposing) return;
       if (e.code === "Enter" && message.trim().length > 0) {
-        console.log(message, "라고 보냄");
-        sendChatMessageDispatcher(socketID, message);
+        sendChatMessageDispatch(socketID, message);
         setMessage("");
       }
     },
