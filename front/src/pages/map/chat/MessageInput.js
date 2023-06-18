@@ -22,7 +22,7 @@ const MessageInput = ({ socketID }) => {
     (e) => {
       if (e.nativeEvent.isComposing) return;
       if (e.code === "Enter" && message.trim().length > 0) {
-        console.log(message);
+        console.log(message, "라고 보냄");
         sendChatMessageDispatcher(socketID, message);
         setMessage("");
       }

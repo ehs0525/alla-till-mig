@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   openRooms: [],
-  history: {},
+  histories: {},
 };
 
 export const mapSlice = createSlice({
@@ -23,17 +23,17 @@ export const mapSlice = createSlice({
         (room) => room.socketID !== action.payload
       );
     },
-    addChatMessage: (state, action) => {
+    addChatHistory: (state, action) => {
       // 이미 대화 내역이 있다면
-      if (state.history[action.payload.socketID]) {
-        state.history[action.payload.socketID].push({
+      if (state.histories[action.payload.recipientSocketID]) {
+        state.histories[action.payload.recipientSocketID].push({
           id: action.payload.id,
           content: action.payload.content,
           isMine: action.payload.isMine,
         });
       } else {
         // 처음 대화하는 거라면
-        state.history[action.payload.socketID] = [
+        state.histories[action.payload.recipientSocketID] = [
           {
             id: action.payload.id,
             content: action.payload.content,
@@ -45,7 +45,7 @@ export const mapSlice = createSlice({
   },
 });
 
-export const { addOpenChatRoom, removeOpenChatRoom, addChatMessage } =
+export const { addOpenChatRoom, removeOpenChatRoom, addChatHistory } =
   mapSlice.actions;
 
 export default mapSlice.reducer;

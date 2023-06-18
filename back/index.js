@@ -25,6 +25,7 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
   console.log(`a user connected: ${socket.id}`);
 
+  // user-login 이벤트
   socket.on("user-login", (data) => {
     socket.join("logged-users");
 
@@ -35,6 +36,19 @@ io.on("connection", (socket) => {
     console.log(onlineUsers);
 
     io.to("logged-users").emit("online-users", objToArray(onlineUsers));
+  });
+
+  // chat-message 이벤트
+  socket.on("chat-message", (data) => {
+    console.log("server received chat-message event");
+    if (onlineUsers[data.recipientSocketID]) {
+      io.to(data.recipientSocketID).emit("chat-message", {
+        senderSocketID: socket.id,
+        id: data.id,
+        content: data.content,
+        isMine: false,
+      });
+    }
   });
 
   socket.on("disconnect", () => {

@@ -21,6 +21,10 @@ export const connectWithSocketIOServer = () => {
     offlineUserDispatcher(socketID);
   });
 
+  socket.on("chat-message", (data) => {
+    console.log("message received", data);
+  });
+
   socket.on("disconnect", () => {
     console.log(`disconnected to socket server: ${socket.id}`); // undefined
   });
@@ -28,4 +32,8 @@ export const connectWithSocketIOServer = () => {
 
 export const login = (data) => {
   socket.emit("user-login", data);
+};
+
+export const sendChatMessage = (data) => {
+  socket.emit("chat-message", data);
 };

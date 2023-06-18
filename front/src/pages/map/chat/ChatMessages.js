@@ -1,18 +1,18 @@
 import React from "react";
-
-import SingleChatMessage from "./SingleChatMessage";
 import { useSelector } from "react-redux";
 
+import SingleChatMessage from "./SingleChatMessage";
+
 const ChatMessages = ({ socketID }) => {
-  const chatMessages = useSelector((state) => state.chat.history[socketID]);
+  const chatHistory = useSelector((state) => state.chat.histories[socketID]);
 
   return (
     <div className="chat_messages_container">
-      {chatMessages?.map((cm) => (
+      {chatHistory?.map((ch) => (
         <SingleChatMessage
-          key={cm.id}
-          content={cm.content}
-          isMine={cm.isMine}
+          key={ch.id}
+          content={ch.content}
+          isMine={ch.isMine}
         />
       ))}
     </div>
