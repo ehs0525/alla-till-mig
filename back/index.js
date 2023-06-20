@@ -36,7 +36,10 @@ io.on("connection", (socket) => {
     };
     console.log(onlineUsers);
 
-    io.to("logged-users").emit("online-users", objToArray(onlineUsers));
+    io.to("logged-users").emit(
+      "online-users",
+      objToArray(onlineUsers, "online-users")
+    );
   });
 
   // chat-message 이벤트
@@ -66,7 +69,7 @@ io.on("connection", (socket) => {
       ],
     };
 
-    io.emit("video-rooms", videoRooms);
+    io.emit("video-rooms", objToArray(videoRooms, "video-rooms"));
   });
 
   socket.on("disconnect", () => {
@@ -86,16 +89,26 @@ server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
-const objToArray = (obj) => {
+const objToArray = (obj, event) => {
   const arr = [];
 
-  Object.entries(obj).forEach(([key, value]) => {
-    arr.push({
-      socketID: key,
-      username: value.username,
-      coords: value.coords,
+  if (event === "online-users") {
+    Object.entries(obj).forEach(([key, value]) => {
+      arr.push({
+        socketID: key,
+        username: value.username,
+        coords: value.coords,
+      });
     });
-  });
+  } else if (event === "video-rooms") {
+    Object.entries(obj).forEach(([key, value]) => {
+      arr.push({
+        id: key,
+        host: value.participants[0].username,
+        numberOfParticipants: value.participants.lenth,
+      });
+    });
+  }
 
   return arr;
 };

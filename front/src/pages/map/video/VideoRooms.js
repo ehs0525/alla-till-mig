@@ -57,12 +57,12 @@ const VideoRooms = () => {
   return (
     <div className="video_rooms_list">
       <CallButton />
-      {DUMMY_VIDEO_ROOMS.map((vr) => (
+      {videoRooms.map((vr) => (
         <JoinButton
           key={vr.id}
-          host={vr.participants[0].username}
+          host={vr.host}
           roomID={vr.id}
-          numberOfParticipants={vr.participants.length}
+          numberOfParticipants={vr.numberOfParticipants}
         />
       ))}
     </div>
