@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
 import mapReducer from "../features/mapSlice";
 import chatReducer from "../features/chatSlice";
@@ -10,4 +10,7 @@ export const store = configureStore({
     chat: chatReducer,
     video: videoReducer,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
