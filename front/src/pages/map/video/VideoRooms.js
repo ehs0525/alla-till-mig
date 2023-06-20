@@ -1,7 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
+
 import CallButton from "./CallButton";
 import JoinButton from "./JoinButton";
+import ParticipantsVideos from "./ParticipantsVideos";
 
 const DUMMY_VIDEO_ROOMS = [
   {
@@ -55,17 +57,20 @@ const VideoRooms = () => {
   const videoRooms = useSelector((state) => state.video.rooms);
 
   return (
-    <div className="video_rooms_list">
-      <CallButton />
-      {videoRooms.map((vr) => (
-        <JoinButton
-          key={vr.id}
-          host={vr.host}
-          videoRoomID={vr.id}
-          numberOfParticipants={vr.numberOfParticipants}
-        />
-      ))}
-    </div>
+    <>
+      <ParticipantsVideos />
+      <div className="video_rooms_list">
+        <CallButton />
+        {videoRooms.map((vr) => (
+          <JoinButton
+            key={vr.id}
+            host={vr.host}
+            videoRoomID={vr.id}
+            numberOfParticipants={vr.numberOfParticipants}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

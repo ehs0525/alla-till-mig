@@ -105,7 +105,7 @@
   background-color: black;
 }
 
-.video_rooms_videos_container {
+.videos_container {
   position: absolute;
   display: flex;
   flex-direction: column-reverse;
@@ -115,7 +115,7 @@
   align-items: flex-end;
 }
 
-.video_rooms_video_container {
+.video_container {
   height: 200px;
   width: 250px;
   background-color: black;
@@ -127,13 +127,13 @@
   justify-content: center;
 }
 
-.video_rooms_video_btns_container {
+.video_btns_container {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
 }
 
-.video_rooms_video_btn {
+.video_btn {
   width: 50px;
   height: 50px;
   border-radius: 50px;
@@ -143,6 +143,6 @@
   transition: 0.3s;
 }
 
-.video_rooms_video_btn:hover {
+.video_btn:hover {
   opacity: 0.6;
 }
