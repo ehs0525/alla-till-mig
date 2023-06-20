@@ -51,7 +51,7 @@
   padding: 0;
 }
 
-.card_buttons_container {
+.card_btns_container {
   display: flex;
   position: absolute;
   right: 0px;
@@ -85,22 +85,22 @@
   flex-direction: row-reverse;
 }
 
-.video_rooms_join_button {
+.join_btn {
+  font-family: 'yg-jalnan';
   width: 45px;
   height: 45px;
   margin-right: 15px;
   border-radius: 45px;
-  background-color: #00ffff;
+  background-color: #4AB3BC;
+  color: white;
   font-size: 24px;
   border: none;
   transition: 0.3s
 }
-
-.video_rooms_join_button:hover {
+.join_btn:hover {
   opacity: 0.6
 }
-
-.video_rooms_join_button:active {
+.join_btn:active {
   background-color: black;
 }
 
@@ -126,13 +126,13 @@
   justify-content: center;
 }
 
-.video_rooms_video_buttons_container {
+.video_rooms_video_btns_container {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
 }
 
-.video_rooms_video_button {
+.video_rooms_video_btn {
   width: 50px;
   height: 50px;
   border-radius: 50px;
@@ -142,6 +142,6 @@
   transition: 0.3s;
 }
 
-.video_rooms_video_button:hover {
+.video_rooms_video_btn:hover {
   opacity: 0.6;
 }

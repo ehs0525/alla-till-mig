@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 
-import CallIcon from "../../assets/images/call.svg";
+import CallIcon from "../../../assets/images/call.svg";
 
 const CallButton = () => {
   const onCall = useCallback(() => {}, []);

@@ -16,7 +16,7 @@ const UserCard = ({ socketID, username, coords }) => {
       <p className="card_label" style={{ fontSize: "14px" }}>
         {getDistance(myLocation, coords)}km
       </p>
-      <div className="card_buttons_container">
+      <div className="card_btns_container">
         <ChatButton socketID={socketID} username={username} />
       </div>
     </div>

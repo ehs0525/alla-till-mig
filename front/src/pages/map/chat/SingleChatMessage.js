@@ -1,17 +1,17 @@
 import React from "react";
 
 const RightChatMessage = ({ content }) => {
-  return <p className="right_chat_message">{content}</p>;
+  return <p className="right_chat_msg">{content}</p>;
 };
 
 const LeftChatMessage = ({ content }) => {
-  return <p className="left_chat_message">{content}</p>;
+  return <p className="left_chat_msg">{content}</p>;
 };
 
 const SingleChatMessage = ({ id, content, isMine }) => {
   return (
     <div
-      className="single_chat_message_container"
+      className="single_chat_msg_container"
       style={
         isMine
           ? { justifyContent: "flex-end" }

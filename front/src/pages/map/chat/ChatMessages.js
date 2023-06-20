@@ -13,7 +13,7 @@ const ChatMessages = ({ socketID }) => {
   }, [chatHistory]);
 
   return (
-    <div className="chat_messages_container">
+    <div className="chat_msgs_container">
       {chatHistory?.map((ch) => (
         <SingleChatMessage
           key={ch.id}

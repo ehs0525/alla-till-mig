@@ -30,9 +30,9 @@ const MessageInput = ({ socketID }) => {
   );
 
   return (
-    <div className="message_input_container">
+    <div className="msg_input_container">
       <input
-        className="message_input"
+        className="msg_input"
         type="text"
         placeholder={
           isOnline ? "메시지 내용을 입력하세요." : "사용자가 오프라인입니다."
