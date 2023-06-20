@@ -7,6 +7,7 @@ import "./MapPage.css";
 import Marker from "./Marker";
 import UserCard from "./UserCard";
 import ChatWrapper from "./chat/ChatWrapper";
+import VideoRooms from "./video/VideoRooms";
 
 const MapPage = () => {
   const { myLocation, onlineUsers, selectedUser } = useSelector(
@@ -48,6 +49,7 @@ const MapPage = () => {
         />
       )}
       <ChatWrapper />
+      <VideoRooms />
     </div>
   );
 };
