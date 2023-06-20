@@ -4,7 +4,7 @@ import { store } from "../../app/store";
 import { addChatHistory, addOpenChatRoom } from "../chatSlice";
 import { sendChatMessage } from "../../socket";
 
-export const sendChatMessageDispatch = (recipientSocketID, data) => {
+export const sendChatMessageDispatch = async (recipientSocketID, data) => {
   const chatMessage = {
     recipientSocketID,
     id: uuidv4(),

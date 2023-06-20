@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 
-const JoinButton = ({ host, roomID, numberOfParticipants }) => {
+const JoinButton = ({ host, videoRoomID, numberOfParticipants }) => {
   const onJoin = useCallback(() => {}, []);
   return (
     <button onClick={onJoin} className="join_btn">

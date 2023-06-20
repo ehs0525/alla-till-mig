@@ -61,7 +61,7 @@ const VideoRooms = () => {
         <JoinButton
           key={vr.id}
           host={vr.host}
-          roomID={vr.id}
+          videoRoomID={vr.id}
           numberOfParticipants={vr.numberOfParticipants}
         />
       ))}

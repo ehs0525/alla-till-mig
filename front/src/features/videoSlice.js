@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   rooms: [],
   currentRoom: null,
+  localStream: null,
+  remoteStream: null,
 };
 
 export const videoSlice = createSlice({
@@ -15,9 +17,16 @@ export const videoSlice = createSlice({
     setCurrentRoom: (state, action) => {
       state.currentRoom = action.payload;
     },
+    setLocalStream: (state, action) => {
+      state.localStream = action.payload;
+    },
+    setRemoteStream: (state, action) => {
+      state.remoteStream = action.payload;
+    },
   },
 });
 
-export const { setRooms, setCurrentRoom } = videoSlice.actions;
+export const { setRooms, setCurrentRoom, setLocalStream, setRemoteStream } =
+  videoSlice.actions;
 
 export default videoSlice.reducer;

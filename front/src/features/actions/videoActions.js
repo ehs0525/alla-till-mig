@@ -1,10 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 
 import { store } from "../../app/store";
-import { setCurrentRoom, setRooms } from "../videoSlice";
+import { setCurrentRoom, setLocalStream, setRooms } from "../videoSlice";
 import { createVideoRoom } from "../../socket";
 
-export const createVideoRoomDispatch = () => {
+export const createVideoRoomDispatch = async () => {
+  const localStream = await openMediaDevicesDispatch();
+  if (!localStream) return;
+
   const id = uuidv4();
 
   // socket 전송
@@ -19,4 +22,21 @@ export const createVideoRoomDispatch = () => {
 
 export const listVideoRoomsDispatch = (data) => {
   store.dispatch(setRooms(data));
+};
+
+// WebRTC
+export const openMediaDevicesDispatch = async () => {
+  const constraints = {
+    video: true,
+    audio: true,
+  };
+
+  const stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+  if (stream) {
+    console.log(stream);
+    store.dispatch(setLocalStream(stream));
+  }
+
+  return Boolean(stream);
 };
