@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   rooms: [],
-  userRoomInfo: null,
+  currentRoom: null,
 };
 
 export const videoSlice = createSlice({
@@ -12,12 +12,12 @@ export const videoSlice = createSlice({
     setRooms: (state, action) => {
       state.rooms = action.payload;
     },
-    setUserRoomInfo: (state, action) => {
-      state.userRoomInfo = action.payload;
+    setCurrentRoom: (state, action) => {
+      state.currentRoom = action.payload;
     },
   },
 });
 
-export const { setRooms, setUserRoomInfo } = videoSlice.actions;
+export const { setRooms, setCurrentRoom } = videoSlice.actions;
 
 export default videoSlice.reducer;

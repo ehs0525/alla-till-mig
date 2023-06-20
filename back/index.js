@@ -8,6 +8,7 @@ const { Server } = require("socket.io");
 const port = process.env.PORT || 3003;
 
 let onlineUsers = {};
+let videoRooms = {};
 
 app.use(cors());
 
@@ -49,6 +50,23 @@ io.on("connection", (socket) => {
         isMine: false,
       });
     }
+  });
+
+  // create-video-room 이벤트
+  socket.on("create-video-room", (data) => {
+    console.log("server create-video-room event", data);
+
+    videoRooms[data.id] = {
+      participants: [
+        {
+          socketID: socket.id,
+          username: onlineUsers[socket.id].username,
+          peerID: data.peerID,
+        },
+      ],
+    };
+
+    io.emit("video-rooms", videoRooms);
   });
 
   socket.on("disconnect", () => {

@@ -7,6 +7,7 @@ import {
   openChatRoomDispatch,
   receiveChatMessageDispatch,
 } from "../features/actions/chatActions";
+import { listVideoRoomsDispatch } from "../features/actions/videoActions";
 
 let socket = null;
 
@@ -30,6 +31,10 @@ export const connectWithSocketIOServer = () => {
     openChatRoomDispatch(data.senderSocketID);
   });
 
+  socket.on("video-rooms", (data) => {
+    listVideoRoomsDispatch(data);
+  });
+
   socket.on("disconnect", () => {
     console.log(`disconnected to socket server: ${socket.id}`); // undefined
   });
@@ -41,4 +46,8 @@ export const login = (data) => {
 
 export const sendChatMessage = (data) => {
   socket.emit("chat-message", data);
+};
+
+export const createVideoRoom = (data) => {
+  socket.emit("create-video-room", data);
 };
