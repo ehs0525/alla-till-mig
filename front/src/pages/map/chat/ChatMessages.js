@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import SingleChatMessage from "./SingleChatMessage";
 
 const ChatMessages = ({ socketID }) => {
   const chatHistory = useSelector((state) => state.chat.histories[socketID]);
+
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    scrollRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [chatHistory]);
 
   return (
     <div className="chat_messages_container">
@@ -15,6 +21,7 @@ const ChatMessages = ({ socketID }) => {
           isMine={ch.isMine}
         />
       ))}
+      <div ref={scrollRef}></div>
     </div>
   );
 };
