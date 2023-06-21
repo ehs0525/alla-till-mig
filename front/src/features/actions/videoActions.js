@@ -24,7 +24,7 @@ export const listVideoRoomsDispatch = (data) => {
   store.dispatch(setRooms(data));
 };
 
-// WebRTC
+// 미디어 기기
 export const openMediaDevicesDispatch = async () => {
   const constraints = {
     video: true,
@@ -34,7 +34,6 @@ export const openMediaDevicesDispatch = async () => {
   const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
   if (stream) {
-    console.log(stream);
     store.dispatch(setLocalStream(stream));
   }
 
