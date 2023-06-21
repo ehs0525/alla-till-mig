@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { store } from "../../app/store";
 import { setCurrentRoom, setLocalStream, setRooms } from "../videoSlice";
 import { createVideoRoom } from "../../socket";
+import peerID from "../../peer";
 
 export const createVideoRoomDispatch = async () => {
   const localStream = await openMediaDevicesDispatch();
@@ -13,7 +14,7 @@ export const createVideoRoomDispatch = async () => {
   // socket 전송
   createVideoRoom({
     id,
-    peerID: 1, // change later on for real pearID
+    peerID,
   });
 
   // local store 설정

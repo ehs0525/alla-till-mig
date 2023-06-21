@@ -1,8 +1,8 @@
 import { Peer } from "peerjs";
 
-export const connectWithPeerServer = () => {
-  let peerID;
+let peerID;
 
+export const connectWithPeerServer = () => {
   // Create the Peer object
   // const peer = new Peer([id], [options]);
   const peer = new Peer(undefined, {
@@ -17,3 +17,5 @@ export const connectWithPeerServer = () => {
     peerID = id;
   });
 };
+
+export default peerID;

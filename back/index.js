@@ -4,6 +4,7 @@ const http = require("http");
 const cors = require("cors");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+const { PeerServer } = require("peer");
 
 const port = process.env.PORT || 3003;
 
@@ -112,3 +113,5 @@ const objToArray = (obj, event) => {
 
   return arr;
 };
+
+const peerServer = PeerServer({ port: 9000, path: "/peer" });

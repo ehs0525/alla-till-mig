@@ -11,6 +11,7 @@ import LoginButton from "./LoginButton";
 import { setMyLocation } from "../../features/mapSlice";
 import { getFakeLocation } from "./FAKE_LOCATIONS";
 import { connectWithSocketIOServer, login } from "../../socket";
+import { connectWithPeerServer } from "../../peer";
 
 const isUsernameValid = (username) => {
   return username.length > 0 && username.length < 10 && !username.includes(" ");
@@ -51,6 +52,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (myLocation) {
       connectWithSocketIOServer();
+      connectWithPeerServer();
     }
   }, [myLocation]);
 
