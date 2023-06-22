@@ -55,20 +55,24 @@ const DUMMY_VIDEO_ROOMS = [
 
 const VideoRooms = () => {
   const videoRooms = useSelector((state) => state.video.rooms);
+  const currentVideoRoom = useSelector((state) => state.video.currentRoom);
 
   return (
     <>
       <ParticipantsVideos />
       <div className="video_rooms_list">
-        <CallButton />
-        {videoRooms.map((vr) => (
-          <JoinButton
-            key={vr.id}
-            host={vr.host}
-            videoRoomID={vr.id}
-            numberOfParticipants={vr.numberOfParticipants}
-          />
-        ))}
+        {!currentVideoRoom && <CallButton />}
+        {videoRooms.map(
+          (vr) =>
+            vr.id !== currentVideoRoom && (
+              <JoinButton
+                key={vr.id}
+                host={vr.host}
+                videoRoomID={vr.id}
+                numberOfParticipants={vr.numberOfParticipants}
+              />
+            )
+        )}
       </div>
     </>
   );

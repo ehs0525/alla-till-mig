@@ -19,6 +19,7 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
+const peerServer = PeerServer({ port: 9000, path: "/peer" });
 
 app.get("/", (req, res) => {
   res.send("Alla Till Mig!");
@@ -113,5 +114,3 @@ const objToArray = (obj, event) => {
 
   return arr;
 };
-
-const peerServer = PeerServer({ port: 9000, path: "/peer" });

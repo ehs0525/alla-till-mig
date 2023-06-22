@@ -22,6 +22,7 @@ export const connectWithPeerServer = () => {
   });
 
   // Emitted when a remote peer attempts to call you
+  // 수신자 쪽
   peer.on("call", (mediaConnection) => {
     const localStream = store.getState().video.localStream;
 
@@ -30,6 +31,7 @@ export const connectWithPeerServer = () => {
     mediaConnection.answer(localStream);
 
     // Set listeners for media connection events
+    // Emitted when a remote peer adds a stream
     mediaConnection.on("stream", (stream) => {
       console.log("remote peer added a stream");
       remoteStreamDispatch(stream);
@@ -37,10 +39,15 @@ export const connectWithPeerServer = () => {
   });
 };
 
+// 발신자 쪽
 export const call = (remotePeerID) => {
   const localStream = store.getState().video.localStream;
 
-  peer.call(remotePeerID, localStream);
+  const mediaConnection = peer.call(remotePeerID, localStream);
+
+  mediaConnection.on("stream", (stream) => {
+    remoteStreamDispatch(stream);
+  });
 };
 
-export default peerID;
+export { peerID };
