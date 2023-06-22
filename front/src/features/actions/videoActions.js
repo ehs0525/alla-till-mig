@@ -1,7 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
 
 import { store } from "../../app/store";
-import { setCurrentRoom, setLocalStream, setRooms } from "../videoSlice";
+import {
+  setCurrentRoom,
+  setLocalStream,
+  setRemoteStream,
+  setRooms,
+} from "../videoSlice";
 import { createVideoRoom } from "../../socket";
 import peerID from "../../peer";
 
@@ -39,4 +44,8 @@ export const openMediaDevicesDispatch = async () => {
   }
 
   return Boolean(stream);
+};
+
+export const remoteStreamDispatch = (remoteStream) => {
+  store.dispatch(setRemoteStream(remoteStream));
 };
