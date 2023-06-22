@@ -42,6 +42,11 @@ io.on("connection", (socket) => {
       "online-users",
       objToArray(onlineUsers, "online-users")
     );
+    // broadcast VideoRooms
+    io.to("logged-users").emit(
+      "video-rooms",
+      objToArray(videoRooms, "video-rooms")
+    );
   });
 
   // chat-message 이벤트
@@ -72,6 +77,29 @@ io.on("connection", (socket) => {
     };
 
     io.emit("video-rooms", objToArray(videoRooms, "video-rooms"));
+  });
+
+  // join-video-room 이벤트
+  socket.on("join-video-room", (data) => {
+    if (!videoRooms[data.id]) return;
+
+    // 기존 참여자에 대한 이벤트
+    videoRooms[data.id].participants.forEach((participant) => {
+      socket.to(participant.socketID).emit("init-video-room", data.peerID);
+    });
+
+    // 서버에 videoRooms 업데이트
+    videoRooms[data.id].participant = [
+      ...videoRooms[data.id].participant,
+      {
+        socketID: socket.id,
+        username: onlineUsers[socket.id].username,
+        peerID: data.peerID,
+      },
+    ];
+
+    // broadcast VideoRooms
+    io.to("logged-users").emit("video-rooms", videoRooms);
   });
 
   socket.on("disconnect", () => {

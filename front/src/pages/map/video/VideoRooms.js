@@ -64,7 +64,7 @@ const VideoRooms = () => {
         {!currentVideoRoom && <CallButton />}
         {videoRooms.map(
           (vr) =>
-            vr.id !== currentVideoRoom && (
+            vr.id !== videoRooms && (
               <JoinButton
                 key={vr.id}
                 host={vr.host}
