@@ -99,7 +99,10 @@ io.on("connection", (socket) => {
     ];
 
     // broadcast VideoRooms
-    io.to("logged-users").emit("video-rooms", videoRooms);
+    io.to("logged-users").emit(
+      "video-rooms",
+      objToArray(videoRooms, "video-rooms")
+    );
   });
 
   socket.on("disconnect", () => {
