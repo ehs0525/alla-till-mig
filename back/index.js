@@ -89,8 +89,8 @@ io.on("connection", (socket) => {
     });
 
     // 서버에 videoRooms 업데이트
-    videoRooms[data.id].participant = [
-      ...videoRooms[data.id].participant,
+    videoRooms[data.id].participants = [
+      ...videoRooms[data.id].participants,
       {
         socketID: socket.id,
         username: onlineUsers[socket.id].username,

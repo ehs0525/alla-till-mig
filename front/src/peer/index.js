@@ -33,7 +33,7 @@ export const connectWithPeerServer = () => {
     // Set listeners for media connection events
     // Emitted when a remote peer adds a stream
     mediaConnection.on("stream", (stream) => {
-      console.log("remote peer added a stream");
+      console.log("remote peer added a stream (callee side)");
       remoteStreamDispatch(stream);
     });
   });
@@ -46,6 +46,7 @@ export const call = (remotePeerID) => {
   const mediaConnection = peer.call(remotePeerID, localStream);
 
   mediaConnection.on("stream", (stream) => {
+    console.log("remote peer added a stream (caller side)");
     remoteStreamDispatch(stream);
   });
 };
