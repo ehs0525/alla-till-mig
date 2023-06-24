@@ -61,3 +61,7 @@ export const joinVideoRoom = (data) => {
   console.log("emitting join-video-room event", data);
   socket.emit("join-video-room", data);
 };
+
+export const leaveVideoRoom = (data) => {
+  socket.emit("leave-video-room", data);
+};

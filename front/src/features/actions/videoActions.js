@@ -7,7 +7,7 @@ import {
   setRemoteStream,
   setRooms,
 } from "../videoSlice";
-import { createVideoRoom, joinVideoRoom } from "../../socket";
+import { createVideoRoom, joinVideoRoom, leaveVideoRoom } from "../../socket";
 import { peerID } from "../../peer";
 
 export const createVideoRoomDispatch = async () => {
@@ -62,4 +62,12 @@ export const joinVideoRoomDispatch = async (id) => {
 
   // local store 설정
   store.dispatch(setCurrentRoom(id));
+};
+
+export const leaveVideoRoomDispatch = (id) => {
+  // disconnect()
+  leaveVideoRoom(id);
+
+  // local store 설정
+  store.dispatch(setCurrentRoom(null));
 };
