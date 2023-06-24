@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import SingleParticipantVideo from "./SingleParticipantVideo";
+import VideoButtonGroup from "./VideoButtonGroup";
 
 const ParticipantsVideos = () => {
   const currentRoom = useSelector((state) => state.video.currentRoom);
@@ -10,6 +11,7 @@ const ParticipantsVideos = () => {
 
   return (
     <div className="videos_container">
+      {currentRoom && <VideoButtonGroup />}
       {currentRoom && localStream && (
         <SingleParticipantVideo stream={localStream} muted />
       )}
