@@ -8,7 +8,7 @@ import {
   receiveChatMessageDispatch,
 } from "../features/actions/chatActions";
 import { listVideoRoomsDispatch } from "../features/actions/videoActions";
-import { call } from "../peer";
+import { call, disconnect } from "../peer";
 
 let socket = null;
 
@@ -40,6 +40,11 @@ export const connectWithSocketIOServer = () => {
     call(peerID); // 기존 참여자가 새로 온 참여자에게 call
   });
 
+  socket.on("peer-disconnect", () => {
+    console.log("peer-disconnect event");
+    disconnect();
+  });
+
   socket.on("disconnect", () => {
     console.log(`disconnected to socket server: ${socket.id}`); // undefined
   });
@@ -63,5 +68,6 @@ export const joinVideoRoom = (data) => {
 };
 
 export const leaveVideoRoom = (data) => {
+  console.log("emitting leave-video-room event", data);
   socket.emit("leave-video-room", data);
 };

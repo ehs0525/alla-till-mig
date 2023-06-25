@@ -76,7 +76,7 @@ io.on("connection", (socket) => {
       ],
     };
 
-    io.emit("video-rooms", objToArray(videoRooms, "video-rooms"));
+    broadcastVideoRooms();
   });
 
   // join-video-room 이벤트
@@ -98,11 +98,32 @@ io.on("connection", (socket) => {
       },
     ];
 
-    // broadcast VideoRooms
-    io.to("logged-users").emit(
-      "video-rooms",
-      objToArray(videoRooms, "video-rooms")
-    );
+    broadcastVideoRooms();
+  });
+
+  // leave-video-room 이벤트
+  socket.on("leave-video-room", (id) => {
+    console.log("server leave-video-room event", id);
+
+    if (videoRooms[id]) {
+      videoRooms[id].participants = videoRooms[id].participants.filter(
+        (participant) => participant.socketID !== socket.id
+      );
+    }
+
+    if (videoRooms[id].participants.length > 0) {
+      // 남아있는 참여자에게 peer connection을 닫는 이벤트를 emit
+      console.log("server emitting peer-disconnect event");
+      socket
+        .to(videoRooms[id].participants[0].socketID)
+        .emit("peer-disconnect");
+    }
+
+    if (videoRooms[id].participants.length === 0) {
+      delete videoRooms[id];
+    }
+
+    broadcastVideoRooms();
   });
 
   socket.on("disconnect", () => {
@@ -121,6 +142,10 @@ io.on("connection", (socket) => {
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
+const broadcastVideoRooms = () => {
+  io.emit("video-rooms", objToArray(videoRooms, "video-rooms"));
+};
 
 const objToArray = (obj, event) => {
   const arr = [];

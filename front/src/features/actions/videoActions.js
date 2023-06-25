@@ -8,7 +8,7 @@ import {
   setRooms,
 } from "../videoSlice";
 import { createVideoRoom, joinVideoRoom, leaveVideoRoom } from "../../socket";
-import { peerID } from "../../peer";
+import { disconnect, peerID } from "../../peer";
 
 export const createVideoRoomDispatch = async () => {
   const localStream = await openMediaDevicesDispatch();
@@ -65,7 +65,8 @@ export const joinVideoRoomDispatch = async (id) => {
 };
 
 export const leaveVideoRoomDispatch = (id) => {
-  // disconnect()
+  // 양쪽에서 모두 끊어야함
+  disconnect();
   leaveVideoRoom(id);
 
   // local store 설정

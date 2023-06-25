@@ -51,4 +51,24 @@ export const call = (remotePeerID) => {
   });
 };
 
+export const disconnect = () => {
+  console.log(
+    "disconnect function in peer",
+    peer.connections,
+    peer._connections
+  );
+  // // peer.connections : hash of all connections associated with this peer, keyed by the remote peer's ID
+  for (let connection in peer.connections) {
+    // console.log("disconnecting...", connection, typeof connection);
+    peer.connections[connection].forEach((conn) => {
+      console.log("disconnecting...", conn.close);
+      conn.peerConnection.close(); // DatConnection .peerConnection : A reference to the RTCPeerConnection object associated with the connection
+
+      if (conn.close) conn.close();
+    });
+  }
+
+  remoteStreamDispatch(null);
+};
+
 export { peerID };
