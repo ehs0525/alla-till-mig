@@ -129,12 +129,39 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log(`a user disconnected: ${socket.id}`);
 
+    // 영상 통화 중이라면
+    Object.entries(videoRooms).forEach(([key, value]) => {
+      const disconnectedUser = value.participants.find(
+        (participant) => participant.socketID === socket.id
+      );
+
+      // 찾는 사용자가 있다면 videoRoom에서 제외
+      if (disconnectedUser) {
+        videoRooms[key].participants = videoRooms[key].participants.filter(
+          (participant) => participant.socketID !== socket.id
+        );
+
+        // 남은 유저가 없다면 방 폭파
+        if (videoRooms[key].participants.length === 0) {
+          delete videoRooms[key];
+        } else {
+          // 있다면 끊긴 유저와의 peer connection을 끊어야함
+          io.to(videoRooms[key].participants[0].socketID).emit(
+            "peer-disconnect"
+          );
+        }
+      }
+
+      broadcastVideoRooms();
+    });
+
     // remove offline user from online users array
     if (onlineUsers[socket.id]) {
       delete onlineUsers[socket.id];
     }
     console.log(onlineUsers);
 
+    // broadcast disconnected user
     io.to("logged-users").emit("offline-users", socket.id);
   });
 });
