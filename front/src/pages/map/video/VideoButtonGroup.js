@@ -12,18 +12,25 @@ import { setIsCameraOn, setIsMicrophoneOn } from "../../../features/videoSlice";
 const VideoButtonGroup = ({ videoRoomID }) => {
   const isMicrophoneOn = useSelector((state) => state.video.isMicrophoneOn);
   const isCameraOn = useSelector((state) => state.video.isCameraOn);
+  const localStream = useSelector((state) => state.video.localStream);
 
   const dispatch = useDispatch();
 
   const onToggleMicrophone = useCallback(() => {
+    localStream
+      .getAudioTracks()
+      .forEach((track) => (track.enabled = !track.enabled));
     dispatch(setIsMicrophoneOn(!isMicrophoneOn));
-  }, [dispatch, isMicrophoneOn]);
+  }, [localStream, dispatch, isMicrophoneOn]);
   const onClickCallSlash = useCallback(() => {
     leaveVideoRoomDispatch(videoRoomID);
   }, [videoRoomID]);
   const onToggleCamera = useCallback(() => {
+    localStream
+      .getVideoTracks()
+      .forEach((track) => (track.enabled = !track.enabled));
     dispatch(setIsCameraOn(!isCameraOn));
-  }, [dispatch, isCameraOn]);
+  }, [localStream, dispatch, isCameraOn]);
 
   return (
     <div className="video_btns_container">
