@@ -30,6 +30,8 @@ export const listVideoRoomsDispatch = (data) => {
   store.dispatch(setRooms(data));
 };
 
+let stream;
+
 // 미디어 기기
 export const openMediaDevicesDispatch = async () => {
   const constraints = {
@@ -37,7 +39,8 @@ export const openMediaDevicesDispatch = async () => {
     audio: true,
   };
 
-  const stream = await navigator.mediaDevices.getUserMedia(constraints);
+  // const stream = await navigator.mediaDevices.getUserMedia(constraints);
+  stream = await navigator.mediaDevices.getUserMedia(constraints);
 
   if (stream) {
     store.dispatch(setLocalStream(stream));
@@ -71,4 +74,7 @@ export const leaveVideoRoomDispatch = (id) => {
 
   // local store 설정
   store.dispatch(setCurrentRoom(null));
+
+  // close media devices
+  stream.getTracks().forEach((track) => track.stop());
 };

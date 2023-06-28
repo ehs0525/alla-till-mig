@@ -21,7 +21,16 @@ const Marker = ({ socketID, username, coords, isMe }) => {
   return (
     <div className="marker_container" onClick={onClickMarker}>
       <img src={MapMarker} alt={username} className="marker_img" />
-      <p className="marker_text">{isMe ? "Me" : username}</p>
+      {/* <p className="marker_text">{isMe ? "Me" : username}</p> */}
+      {isMe ? (
+        <p className="marker_text" style={{ color: "#FEE76F" }}>
+          {username}
+        </p>
+      ) : (
+        <p className="marker_text" style={{ color: "white" }}>
+          {username}
+        </p>
+      )}
     </div>
   );
 };

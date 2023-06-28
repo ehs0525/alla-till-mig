@@ -13,7 +13,7 @@ const ParticipantsVideos = () => {
     <div className="videos_container">
       {currentRoom && <VideoButtonGroup videoRoomID={currentRoom} />}
       {currentRoom && localStream && (
-        <SingleParticipantVideo stream={localStream} />
+        <SingleParticipantVideo stream={localStream} muted />
       )}
       {currentRoom && remoteStream && (
         <SingleParticipantVideo stream={remoteStream} />

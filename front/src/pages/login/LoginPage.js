@@ -9,7 +9,6 @@ import NameInput from "./NameInput";
 import LoginButton from "./LoginButton";
 
 import { setMyLocation } from "../../features/mapSlice";
-import { getFakeLocation } from "./FAKE_LOCATIONS";
 import { connectWithSocketIOServer, login } from "../../socket";
 import { connectWithPeerServer } from "../../peer";
 
@@ -46,8 +45,8 @@ const LoginPage = () => {
       timeout: 5000,
     };
 
-    // navigator.geolocation.getCurrentPosition(success, error, options);
-    success(getFakeLocation());
+    navigator.geolocation.getCurrentPosition(success, error, options);
+    // success(getFakeLocation());
   }, [dispatch]);
   useEffect(() => {
     if (myLocation) {
